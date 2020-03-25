@@ -1,0 +1,54 @@
+FROM ubuntu:18.04
+
+#
+# Prerequisites
+#
+RUN apt-get update && apt-get install -y \
+    xz-utils \ 
+    build-essential \ 
+    curl \
+    cmake \
+    git \
+    autoconf \
+    libtool \
+    zlib1g \
+    zlib1g-dev
+
+#
+# Clang
+#
+RUN curl -SL http://releases.llvm.org/9.0.0/clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04.tar.xz | tar -xJC . && \
+    mv clang+llvm-9.0.0-x86_64-linux-gnu-ubuntu-18.04 clang_9.0.0 && \
+    echo 'export PATH=/clang_9.0.0/bin:$PATH' >> ~/.bashrc && \
+    echo 'export LD_LIBRARY_PATH=/clang_9.0.0/lib:$LD_LIBRARY_PATH' >> ~/.bashrc
+
+#
+# Poco
+#
+RUN git clone -b master https://github.com/pocoproject/poco.git && \
+    cd poco && \
+    mkdir cmake-build && \
+    cd cmake-build && \
+    cmake .. && cmake --build . && \
+    cmake --build . --target install
+
+#
+# Google Test
+#
+RUN curl -SL https://github.com/google/googletest/archive/release-1.10.0.tar.gz | tar -zxf - && \
+    cd googletest-release-1.10.0 && \
+    mkdir cmake-build && \
+    cd cmake-build && \
+    cmake .. && cmake --build . && \
+    cmake --build . --target install
+
+#
+# FIX8
+#
+RUN git clone https://github.com/fix8/fix8.git --branch=master && \
+    cd fix8 && \
+    . ~/.bashrc && \   
+    ./bootstrap && \
+    CC=clang CXX=clang++ CXXFLAGS=-std=c++11 LDFLAGS=-L/usr/local/lib ./configure && \
+    LD_LIBRARY_PATH=/usr/local/lib make && \
+    make install
