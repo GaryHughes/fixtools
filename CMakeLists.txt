@@ -13,8 +13,6 @@ include_directories(
 
 link_directories("/usr/local/lib")
 
-# POCO_LIBS = -lPocoFoundation -lPocoNet -lPocoUtil -lPocoXML -lPocoJSON
-# GEN_LIBS = -lfix8 -lpthread
 if(APPLE)
 
     set(POCO_LIBS 
@@ -25,6 +23,13 @@ if(APPLE)
         ${POCO_LIBS})
 
 else()
+
+    set(POCO_LIBS
+        PocoNet.so)
+
+    set(FIX8_LIBS
+        fix8.so
+        ${POCO_LIBS})
 
 endif()
 
