@@ -6,12 +6,23 @@ project(fixtools)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
 set(CMAKE_INSTALL_RPATH "")
 
+
+set(BOOST_VERSION_REQUIRED 1.72)
+
+find_package(Boost ${BOOST_VERSION_REQUIRED} EXACT
+             COMPONENTS 
+                program_options 
+             REQUIRED)
+
 include_directories(
     "/usr/local/include"
     ${CMAKE_BINARY_DIR}
 )
 
-link_directories("/usr/local/lib")
+link_directories(
+    "/usr/local/lib"
+    ${Boost_LIBRARY_DIRS}
+)
 
 if(APPLE)
 
@@ -22,6 +33,9 @@ if(APPLE)
         fix8.dylib
         ${POCO_LIBS})
 
+    set(BOOST_LIBS
+        libboost_program_options-mt.dylib)
+
 else()
 
     set(POCO_LIBS
@@ -31,6 +45,7 @@ else()
         fix8.so
         ${POCO_LIBS})
 
+  
 endif()
 
 add_subdirectory(schema)
