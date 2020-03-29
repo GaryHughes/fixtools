@@ -4,6 +4,9 @@ else()
     set(CLANG_ROOT "/clang_10.0.0")
 endif()
 
+# fix8 is using the register keyword which 17 doesn't like - investigate.
+set(CMAKE_CXX_STANDARD 14)
+
 set(CMAKE_C_COMPILER             "${CLANG_ROOT}/bin/clang")
 set(CMAKE_C_FLAGS                "-Wall")
 set(CMAKE_C_FLAGS_DEBUG          "-g")
@@ -17,12 +20,6 @@ set(CMAKE_CXX_FLAGS_DEBUG          "-g")
 set(CMAKE_CXX_FLAGS_MINSIZEREL     "-Os -DNDEBUG")
 set(CMAKE_CXX_FLAGS_RELEASE        "-O3 -DNDEBUG")
 set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g")
-
-set(CMAKE_AR      "${CLANG_ROOT}/bin/llvm-ar")
-set(CMAKE_LINKER  "${CLANG_ROOT}/bin/ld.lld")
-set(CMAKE_NM      "${CLANG_ROOT}/bin/llvm-nm")
-set(CMAKE_OBJDUMP "${CLANG_ROOT}/bin/llvm-objdump")
-set(CMAKE_RANLIB  "${CLANG_ROOT}/bin/llvm-ranlib")
 
 add_definitions(-Wno-error=suggest-override)
 add_definitions(-Wno-unknown-warning-option)
