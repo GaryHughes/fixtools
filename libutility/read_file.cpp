@@ -6,7 +6,7 @@
 #include <boost/iostreams/filter/bzip2.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 
-namespace utilities
+namespace utility
 {
 
 void read_file(const std::string& filename, const std::function<void(std::istream& is)>& reader)
@@ -35,4 +35,4 @@ void read_file(const std::string& filename, const std::function<void(std::istrea
     }
 }
 
-} // utilities
+}

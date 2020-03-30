@@ -4,7 +4,7 @@
 #include <iostream>
 #include <functional>
 
-namespace utilities
+namespace utility
 {
 
 void read_file(const std::string& filename, const std::function<void(std::istream& is)>& reader);

@@ -10,14 +10,15 @@ set(CMAKE_INSTALL_RPATH "")
 set(BOOST_VERSION_REQUIRED 1.72)
 
 find_package(Boost ${BOOST_VERSION_REQUIRED} EXACT
-             COMPONENTS 
-                program_options 
-             REQUIRED)
+    COMPONENTS 
+    program_options 
+    REQUIRED
+)
 
 include_directories(
     "/usr/local/include"
-    ${CMAKE_BINARY_DIR}
-    ${CMAKE_BINARY_DIR}/thirdparty/catch2/include
+    ${CMAKE_BINARY_DIR} # This is for the generated schema headers
+    ${CMAKE_SOURCE_DIR}/thirdparty/catch2/include
 )
 
 link_directories(
@@ -51,6 +52,9 @@ else()
         
 endif()
 
+enable_testing()
+
 add_subdirectory(libutility)
+add_subdirectory(libutility_tests)
 add_subdirectory(libschema)
 add_subdirectory(fixcat)
