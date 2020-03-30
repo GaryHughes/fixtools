@@ -11,13 +11,15 @@ set(BOOST_VERSION_REQUIRED 1.72)
 
 find_package(Boost ${BOOST_VERSION_REQUIRED} EXACT
     COMPONENTS 
-    program_options 
+    program_options
+    iostreams
     REQUIRED
 )
 
 include_directories(
     "/usr/local/include"
     ${CMAKE_BINARY_DIR} # This is for the generated schema headers
+    ${CMAKE_SOURCE_DIR}
     ${CMAKE_SOURCE_DIR}/thirdparty/catch2/include
 )
 
@@ -36,7 +38,8 @@ if(APPLE)
         ${POCO_LIBS})
 
     set(BOOST_LIBS
-        libboost_program_options-mt.dylib)
+        libboost_program_options-mt.dylib
+        libboost_iostreams-mt.dylib)
 
 else()
 
@@ -48,7 +51,8 @@ else()
         ${POCO_LIBS})
 
     set(BOOST_LIBS
-        libboost_program_options.so)
+        libboost_program_options.so
+        libboost_iostreams.so)
         
 endif()
 
