@@ -4,7 +4,8 @@ add_executable(fixcat
 )
 
 target_link_libraries(fixcat 
-    schema 
+    libschema
+    libutility
     ${FIX8_LIBS}
     ${BOOST_LIBS}
 )

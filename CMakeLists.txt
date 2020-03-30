@@ -17,6 +17,7 @@ find_package(Boost ${BOOST_VERSION_REQUIRED} EXACT
 include_directories(
     "/usr/local/include"
     ${CMAKE_BINARY_DIR}
+    ${CMAKE_BINARY_DIR}/thirdparty/catch2/include
 )
 
 link_directories(
@@ -45,8 +46,11 @@ else()
         fix8.so
         ${POCO_LIBS})
 
-  
+    set(BOOST_LIBS
+        libboost_program_options.so)
+        
 endif()
 
-add_subdirectory(schema)
+add_subdirectory(libutility)
+add_subdirectory(libschema)
 add_subdirectory(fixcat)

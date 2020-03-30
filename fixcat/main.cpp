@@ -1,7 +1,7 @@
 #include <fix8/f8includes.hpp>
-#include "schema/FIX50SP2_types.hpp"
-#include "schema/FIX50SP2_router.hpp"
-#include "schema/FIX50SP2_classes.hpp"
+#include "libschema/FIX50SP2_types.hpp"
+#include "libschema/FIX50SP2_router.hpp"
+#include "libschema/FIX50SP2_classes.hpp"
 #include "options.hpp"
 
 using namespace FIX8;
