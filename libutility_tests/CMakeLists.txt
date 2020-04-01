@@ -7,4 +7,6 @@ target_link_libraries(libutility_tests
     utility
 )
 
-add_test(NAME libutility_tests COMMAND libutility_tests)
+add_test(NAME libutility_tests 
+    COMMAND libutility_tests
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
