@@ -11,7 +11,7 @@ using namespace FIX8;
 
 const char* fix_message_prefix = "8=FIX";
 
-void pretty_print_line(const std::string& line)
+void pretty_print_line(const std::string& line, const options& options)
 {
     auto start_of_message = line.find(fix_message_prefix);
 
@@ -37,10 +37,17 @@ void pretty_print_line(const std::string& line)
     // TODO - improve the diagnostics in this function particularly when the checksum bit fails @ line 259
     std::unique_ptr<Message> message(Message::factory(FIX8::FIX50SP2::ctx(), message_text, true, true));
 
-    if (message)
+    if (!message)
     {
-        std::cout << *message << std::endl;
+        return;
     }
+
+    if (!options.include_admin_messages() && message->is_admin())
+    {
+        return;
+    }
+
+    std::cout << *message << std::endl;
 }
 
 int main(int argc, const char** argv)
@@ -57,7 +64,7 @@ int main(int argc, const char** argv)
 
         for (const auto filename : options.input_files())
         {
-            read_file(filename, [](std::istream& is)
+            read_file(filename, [&options](std::istream& is)
             {
                 for (;;)
                 {
@@ -68,7 +75,7 @@ int main(int argc, const char** argv)
                         break;
                     }
 
-                    pretty_print_line(line);
+                    pretty_print_line(line, options);
                 }
             });
         }
