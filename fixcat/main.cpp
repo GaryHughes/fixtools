@@ -5,13 +5,14 @@
 #include "libschema/FIX50SP2_classes.hpp"
 #include "options.hpp"
 #include "libutility/read_file.hpp"
+#include "libutility/print_fix_message.hpp"
 
 using namespace utility;
 using namespace FIX8;
 
 const char* fix_message_prefix = "8=FIX";
 
-void pretty_print_line(const std::string& line, const options& options)
+void find_and_print_message(const std::string& line, const options& options)
 {
     auto start_of_message = line.find(fix_message_prefix);
 
@@ -25,7 +26,7 @@ void pretty_print_line(const std::string& line, const options& options)
 
     // fix8 is stricter than we would like for this kind of activity
     // TODO - add the ability to parse partial messages
-    auto checksum_pos = message_text.find_last_of('\x01' + "10=");
+    auto checksum_pos = message_text.find_last_of(std::string("\x01") + "10=");
 
     if (checksum_pos == std::string::npos)
     {
@@ -47,7 +48,8 @@ void pretty_print_line(const std::string& line, const options& options)
         return;
     }
 
-    std::cout << *message << std::endl;
+    print_fix_message(*message, std::cout);
+    std::cout << "\n\n";
 }
 
 int main(int argc, const char** argv)
@@ -75,7 +77,7 @@ int main(int argc, const char** argv)
                         break;
                     }
 
-                    pretty_print_line(line, options);
+                    find_and_print_message(line, options);
                 }
             });
         }
