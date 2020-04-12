@@ -1,0 +1,1 @@
+![Build](https://github.com/GaryHughes/fixtools/workflows/Build/badge.svg)
