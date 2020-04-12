@@ -5,6 +5,7 @@ add_executable(libutility_tests
 
 target_link_libraries(libutility_tests
     utility
+    ${BOOST_LIBS}
 )
 
 add_test(NAME libutility_tests 
