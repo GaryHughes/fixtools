@@ -4,8 +4,7 @@ else()
     set(CLANG_ROOT "/clang_10.0.0")
 endif()
 
-# fix8 is using the register keyword which 17 doesn't like - investigate.
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_C_COMPILER             "${CLANG_ROOT}/bin/clang")
 set(CMAKE_C_FLAGS                "-Wall")

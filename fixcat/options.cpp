@@ -24,13 +24,14 @@ bool options::parse(int argc, const char** argv)
 
     po::variables_map variables;
     po::store(po::command_line_parser(argc, argv).options(options).positional(positional).run(), variables);
-    po::notify(variables);
 
     if (variables.count(option_help))
     {
         m_help = true;
         return true;
     }
+
+    po::notify(variables);
 
     m_include_admin_messages = variables.count(option_admin);
   
