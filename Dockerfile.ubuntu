@@ -60,7 +60,7 @@ RUN git clone https://github.com/fix8/fix8.git --branch=dev && \
     cd fix8 && \
     . ~/.bashrc && \   
     ./bootstrap && \
-    CC=clang CXX=clang++ CXXFLAGS=-std=c++17 LDFLAGS=-L/usr/local/lib ./configure && \
+    CC=clang CXX=clang++ CXXFLAGS="-std=c++17 -O2" LDFLAGS=-L/usr/local/lib ./configure && \
     LD_LIBRARY_PATH=/usr/local/lib make && \
     make install
 
