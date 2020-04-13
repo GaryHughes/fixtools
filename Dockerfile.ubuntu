@@ -13,8 +13,7 @@ RUN apt-get update && apt-get install -y \
     libtool \
     zlib1g \
     zlib1g-dev \
-    vim \           # handy for testing the image manually
-    libbz2-dev      # boost::iostreams
+    libbz2-dev
    
 #
 # Clang
