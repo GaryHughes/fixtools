@@ -76,7 +76,8 @@
         "unordered_map": "cpp",
         "utility": "cpp",
         "variant": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "*.ipp": "cpp"
     },
     "cmake.configureOnOpen": false
 }

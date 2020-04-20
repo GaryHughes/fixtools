@@ -1,5 +1,5 @@
 #include <iostream>
-#include "options.hpp"
+#include "pipeline.hpp"
 
 int main(int argc, const char** argv)
 {
@@ -13,7 +13,10 @@ int main(int argc, const char** argv)
             return 1;
         }
 
-         
+        while (true)
+        {
+            pipeline().run(options);
+        }
     }
     catch (std::exception& ex)
     {
