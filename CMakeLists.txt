@@ -52,7 +52,8 @@ else()
 
     set(BOOST_LIBS
         libboost_program_options.so
-        libboost_iostreams.so)
+        libboost_iostreams.so
+        pthread)
         
 endif()
 
