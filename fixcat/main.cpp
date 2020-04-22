@@ -34,7 +34,7 @@ void find_and_print_message(const std::string& line, const options& options)
     }
 
     message_text = message_text.substr(0, checksum_pos + 6);
-
+   
     // TODO - improve the diagnostics in this function particularly when the checksum bit fails @ line 259
     std::unique_ptr<Message> message(Message::factory(FIX8::FIX50SP2::ctx(), message_text, true, true));
 
